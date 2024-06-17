@@ -9,7 +9,7 @@
 
 body {
    background-color: darkgoldenrod;
-   background-image: url("./favicon.png");
+   background-image: url("favicon.png");
    /* background: linear-gradient(to right, #b8860b, #fbd786, #c6ffdd); */
 
    display: flex;
