@@ -60,22 +60,59 @@ function showQuestion() {
     headerContainer.innerHTML = title;    
 
     //answers
-    for (answerText of questions[questionIndex]['answers']) {
+        //inny sposób
+    /*for ([index, answerText] of questions[questionIndex]['answers'].entries()) {
+        console.log(index+1, answerText);
         const questionTemplate =
             `<li>
                 <label>
-                    <input type="radio" class="answer" name="answer" />
+                    <input value = "%number%" type="radio" class="answer" name="answer" />
                     <span>%answer%</span>
                 </label>
-            </li>`;
-        const answerHTML = questionTemplate.replace('%answer%', answerText);
+            </li>`; 
+        const answerHTML = questionTemplate.replace('%answer%, answers)
         listContainer.innerHTML += answerHTML;
+    } */
+
+    let answerNumber = 1;
+    for (answerText of questions[questionIndex]['answers']) {
+        console.log(answerNumber, answerText); 
+
+        const questionTemplate =
+            `<li>
+                <label>
+                    <input value = "%number%" type="radio" class="answer" name="answer" />
+                    <span>%answer%</span>
+                </label>
+            </li>`; 
+        const answerHTML = questionTemplate
+                            .replace('%answer%', answerText)
+                            .replace('%number%', answerNumber);
+        // inny sposób 
+        // let answerHTML = questionTemplate.replace('%answer%', answerText);
+        // answerHTML = answerHTML.replace('%number%', answerNumber);
+        // console.log(answerHTML);
+
+        listContainer.innerHTML += answerHTML;
+        answerNumber++;
     }
 }
 
 // CLICKING BY BUTTON (checkAnswer)
 function checkAnswer() {
-console.log('checkAnswer started!');
+
+// FIND SELECTED BUTTON radio
+checkedRadio = listContainer.querySelector('input[type="radio"]:checked');
+
+// If the answer is not selected - do nothing, exit the function
+if (!checkedRadio) {                                                 
+    submitBtn.blur();
+    return
+ }
+
+ // finding the number of the user's answer
+ const userAnswer = parseInt(checkedRadio.value); //преобразовання значення радіокнопки (checkedRadio.value) з стрічки у число 
+
 }
 
 //check answer
