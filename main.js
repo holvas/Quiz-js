@@ -105,7 +105,7 @@ function checkAnswer() {
     // If the answer is not selected - do nothing, exit the function
     if (!checkedRadio) {                                                 
         submitBtn.blur();
-        return
+        return alert('Оберіть відповідь');
     }
 
     // finding the number of the user's answer
