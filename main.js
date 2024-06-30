@@ -116,6 +116,7 @@ function checkAnswer() {
         score++; // score = score + 1 
     }
 
+    //check is this question last?
     if (questionIndex !== questions.length - 1) {
         console.log("It's NOT last question");
         questionIndex++;
@@ -130,4 +131,7 @@ function checkAnswer() {
 
 function showResults() {
     console.log('showResults started!');
+    console.log(score);
+
+    const resultsTamplate = ``
 }
