@@ -76,8 +76,6 @@ function showQuestion() {
 
     let answerNumber = 1;
     for (answerText of questions[questionIndex]['answers']) {
-        console.log(answerNumber, answerText); 
-
         const questionTemplate =
             `<li>
                 <label>
@@ -101,18 +99,35 @@ function showQuestion() {
 // CLICKING BY BUTTON (checkAnswer)
 function checkAnswer() {
 
-// FIND SELECTED BUTTON radio
-checkedRadio = listContainer.querySelector('input[type="radio"]:checked');
+    // FIND SELECTED BUTTON radio
+    checkedRadio = listContainer.querySelector('input[type="radio"]:checked');
 
-// If the answer is not selected - do nothing, exit the function
-if (!checkedRadio) {                                                 
-    submitBtn.blur();
-    return
- }
+    // If the answer is not selected - do nothing, exit the function
+    if (!checkedRadio) {                                                 
+        submitBtn.blur();
+        return
+    }
 
- // finding the number of the user's answer
- const userAnswer = parseInt(checkedRadio.value); //преобразовання значення радіокнопки (checkedRadio.value) з стрічки у число 
+    // finding the number of the user's answer
+    const userAnswer = parseInt(checkedRadio.value); //преобразовання значення радіокнопки (checkedRadio.value) з стрічки у число 
 
+    // If the answer is correct - we increase the user's score
+    if (userAnswer === questions[questionIndex]['correct']) {
+        score++; // score = score + 1 
+    }
+
+    if (questionIndex !== questions.length - 1) {
+        console.log("It's NOT last question");
+        questionIndex++;
+        clearPage();
+        showQuestion();
+    } else {
+        console.log("It's last question");
+        clearPage();
+        showResults();
+    }
 }
 
-//check answer
+function showResults() {
+    console.log('showResults started!');
+}
