@@ -118,20 +118,47 @@ function checkAnswer() {
 
     //check is this question last?
     if (questionIndex !== questions.length - 1) {
-        console.log("It's NOT last question");
         questionIndex++;
         clearPage();
         showQuestion();
     } else {
-        console.log("It's last question");
         clearPage();
         showResults();
     }
 }
 
 function showResults() {
-    console.log('showResults started!');
-    console.log(score);
+    const resultsTamplate = `
+            <h2 class="title">%title%</h2>
+            <h3 class="summary">%message%</h3>
+            <p class="result">%result%</p>
+        `;
+    
+    let title, message;
 
-    const resultsTamplate = ``
+    //Title and text options
+    if (score === questions.length) {
+        title = 'Вітаємо!';
+        message = 'Ви відповили вірно на всі питання!';
+    } else if ((score * 100) / questions.length >= 50) {
+        title = `Непоганий результат!`;
+        message = `Ви надали більше половини правильних відповіді`
+    } else {
+        title = `Вам треба постаратися більше...`;
+        message = `Поки що у вас менше половини вірних відповідей...`
+    }
+
+    let result = `${score} з ${questions.length}`;
+
+    //Final message
+    const finalMessage = resultsTamplate
+                            .replace('%title%', title)
+                            .replace('%message%', message)
+                            .replace('%result%', result)
+    headerContainer.innerHTML = finalMessage;
+
+    //CHANGE THE BUTTON TO "Play Again"
+    submitBtn.blur();
+    submitBtn.innerText = 'Почати грати знов';
+    submitBtn.onclick = () => history.go();
 }
